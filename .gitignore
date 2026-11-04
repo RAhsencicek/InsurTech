@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production builds
+dist/
+*/dist/
+*.tsbuildinfo
+
+# OS & Environment
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+.env.local
+.env.*.local
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary & agent work dirs
+.manus/
+.work/
+*.log

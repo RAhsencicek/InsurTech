@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>InsurTech Core Platform - Canlı MVP Modülleri ve Yetenek Brifingi</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 11mm 13mm 11mm 13mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      background-color: #ffffff;
+      line-height: 1.44;
+      font-size: 11.4px;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .page-container {
+      page-break-after: always;
+      height: 98vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .page-container:last-child {
+      page-break-after: avoid;
+    }
+    
+    /* Cover Styling */
+    .cover-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 40px;
+      background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    
+    .badge-primary { background-color: #3b82f6; color: #ffffff; }
+    .badge-emerald { background-color: #10b981; color: #ffffff; }
+    .badge-qatar { background-color: #8b1538; color: #ffffff; }
+    
+    .cover-title {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 16px 0 10px 0;
+      letter-spacing: -0.02em;
+    }
+    
+    .cover-subtitle {
+      font-size: 15px;
+      color: #94a3b8;
+      font-weight: 400;
+      line-height: 1.4;
+      max-width: 620px;
+    }
+    
+    .cover-meta {
+      border-top: 1px solid #334155;
+      padding-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    
+    .meta-item { font-size: 10px; color: #94a3b8; }
+    .meta-val { font-size: 12px; font-weight: 600; color: #f8fafc; margin-top: 3px; }
+    
+    /* Section Headers */
+    .section-header {
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 4px;
+      margin-top: 2px;
+      margin-bottom: 9px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    
+    .section-header h2 {
+      font-size: 15.5px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    
+    .section-header .sub {
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Detailed Module Cards */
+    .module-card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .module-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 5px;
+      margin-bottom: 6px;
+    }
+
+    .module-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .module-badge {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .module-row {
+      margin-bottom: 4px;
+      font-size: 11.2px;
+      line-height: 1.45;
+    }
+
+    .module-row strong {
+      color: #1e3a8a;
+    }
+
+    .revolution-box {
+      background: #f8fafc;
+      border-left: 3px solid #10b981;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-top: 5px;
+      font-size: 10.8px;
+      color: #065f46;
+    }
+
+    .highlight-banner {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 7px 0;
+      page-break-inside: avoid;
+    }
+
+    .highlight-title {
+      font-weight: 800;
+      color: #1e40af;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 7px 0;
+      font-size: 11px;
+      page-break-inside: avoid;
+    }
+    
+    .table-custom th {
+      background-color: #0f172a;
+      color: #ffffff;
+      padding: 5px 8px;
+      font-weight: 600;
+      text-align: left;
+    }
+    
+    .table-custom td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .table-custom tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .footer-note {
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 5px;
+      font-size: 9.5px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== SAYFA 1: KAPAK & YÖNETİCİ ÖZETİ ==================== -->
+  <div class="page-container">
+    <div class="cover-card">
+      <div>
+        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+          <span class="badge badge-emerald">Ürün & Yetenek Brifingi</span>
+          <span class="badge badge-qatar">Katar Ekibi İçin</span>
+        </div>
+        <h1 class="cover-title">INSURTECH CORE PLATFORM<br>ÇALIŞAN MVP MODÜLLERİ VE YETENEK BRİFİNGİ</h1>
+        <p class="cover-subtitle">
+          Katar'da Pazar Araştırması Yapacak ve Kurumlarla Görüşecek Ekip Arkadaşımız İçin: Ürünün Bugüne Kadar Tamamlanan Canlı Özellikleri, Çalışma Mantığı ve Sektörel Gücü
+        </p>
+      </div>
+      
+      <div>
+        <div style="background: rgba(255,255,255,0.06); padding: 16px 20px; border-radius: 10px; margin-bottom: 18px; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="font-size: 12.5px; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">💡 Arkadaşımızın Masada Bilmesi Gereken En Temel Gerçek:</div>
+          <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.6;">
+            "Biz masaya sadece bir fikir, sunum veya niyet mektubuyla gitmiyoruz. Arkamızda <strong>kodlanmış, tıkır tıkır çalışan, canlı arayüzleri ve akıllı algoritmaları hazır bir Core InsurTech ERP sistemi</strong> var. Bu doküman, karşıdaki sigortacıya veya yatırımcıya 'Biz bunu zaten yaptık, gelin ekranını canlı gösterelim' diyebilmeniz için hazırlanmıştır."
+          </div>
+        </div>
+        
+        <div class="cover-meta">
+          <div class="meta-item">
+            <div>DOKÜMAN AMACI</div>
+            <div class="meta-val">MVP Yetenek Röntgeni (Deep-Dive)</div>
+          </div>
+          <div class="meta-item">
+            <div>TEKNOLOJİ OMURGASI</div>
+            <div class="meta-val">React 19, TypeScript, Tailwind, Computer Vision</div>
+          </div>
+          <div class="meta-item">
+            <div>HAZIRLIK DERECESİ</div>
+            <div class="meta-val">Canlı Demo ve Pilot Kullanıma Hazır</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SAYFA 2: SATIŞ ÖNCESİ & OPERASYON MODÜLLERİ ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>1. Satış Öncesi ve Operasyon Modülleri (Mevcut Canlı MVP)</h2>
+        <span class="sub">Hız & Veri Girişini Sıfırlayan Altyapı</span>
+      </div>
+
+      <!-- MODÜL 1: ÇOKLU TEKLİF MOTORU -->
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">⚡ Modül 1: Deterministik Çoklu Teklif Motoru (Multi-Quote Engine)</div>
+          <span class="module-badge">Canlı / Çalışıyor</span>
+        </div>
+        <div class="module-row">
+          <strong>• Ne Yapıyor?:</strong> Müşterinin tek bir kimlik/araç bilgisiyle 15+ farklı sigorta şirketinden (Allianz, Anadolu, AXA vb.) aynı anda, saniyeler içinde karşılaştırmalı teklif toplar.
+        </div>
+        <div class="module-row">
+          <strong>• Nasıl Çalışıyor?:</strong> Sistem arka planda deterministik (tutarlı ve dalgalanmayan) bir fiyatlama algoritması işletir. Sürücünün Tramer hasarsızlık basamağını (1-8 arası), araç kasko değerini ve meslek indirimlerini (Doktor, Öğretmen, Memur vb. için %15 otomatik iskonto) anında hesaplar.
+        </div>
+        <div class="revolution-box">
+          <strong>💡 Neden Devrim?:</strong> Normalde bir acente çalışanı 10 ayrı sigorta şirketinin internet sitesini tek tek açıp aynı bilgileri yazarak 15-20 dakika harcar. Bizim motorumuz tek tıkla 3 saniyede tüm fiyatları ve teminatları tek bir kartta karşılaştırır.
+        </div>
+      </div>
+
+      <!-- MODÜL 2: AI BELGE OKUMA OCR -->
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">👁️ Modül 2: Bounding-Box AI Belge Eşleme (Visual OCR Wizard)</div>
+          <span class="module-badge">Canlı / Çalışıyor</span>
+        </div>
+        <div class="module-row">
+          <strong>• Ne Yapıyor?:</strong> WhatsApp'tan veya e-postadan gelen eğri büğrü, parlamış veya gölgeli araç ruhsatı, kimlik kartı ve DASK tapu fotoğraflarını otomatik okur.
+        </div>
+        <div class="module-row">
+          <strong>• Nasıl Çalışıyor?:</strong> Bilgisayarlı Görü (Computer Vision) ve Bounding-Box teknolojisi kullanır. Taranan belgedeki Plaka, TCKN, Şasi No, Motor No, Ruhsat Seri No ve UAVT Adres Kodunu yeşil kutucuklarla görsel olarak işaretler ve ekrandaki giriş formlarına hatasız doldurur. Kullanıcı ekranda belgenin neresinin okunduğunu canlı görür ve isterse 1 tıkla düzeltebilir.
+        </div>
+        <div class="revolution-box">
+          <strong>💡 Neden Devrim?:</strong> Personelin gün boyu 20 haneli karmaşık şasi numaralarını elle yazma ("veri ameleliği") çilesini bitirir. Yanlış yazım nedeniyle hatalı poliçe kesilme riskini sıfıra indirir.
+        </div>
+      </div>
+
+      <!-- MODÜL 3: PORTFÖY GÖÇ SİHİRBAZI -->
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">📦 Modül 3: Akıllı Portföy Veri Göç Motoru (Migration Wizard)</div>
+          <span class="module-badge">Canlı / Çalışıyor</span>
+        </div>
+        <div class="module-row">
+          <strong>• Ne Yapıyor?:</strong> Başka programlarda (Polisoft, Polixir veya Excel) kayıtlı olan 10 yıllık 50.000 müşteriyi ve geçmiş poliçeleri yeni sistemimize kayıpsız aktarır.
+        </div>
+        <div class="module-row">
+          <strong>• Nasıl Çalışıyor?:</strong> 4 adımlı endüstriyel bir veri aktarım tüneli işletir:  
+          <em>1. Örnek Dosya Seçimi ➔ 2. Önizleme Tablosu ➔ 3. Kontrol & Sağlık Raporu (KPS/TCKN algoritma denetimi, mükerrer müşteri tespiti, açık hesap risk kontrolü) ➔ 4. Onay & Portföye Canlı Aktarma.</em>
+        </div>
+        <div class="revolution-box">
+          <strong>💡 Neden Devrim?:</strong> Sektördeki acentelerin yazılım değiştirmemesinin 1 numaralı sebebi *"Eski verilerim kaybolur, müşterilerimi kaybederim"* korkusudur. Bu modül 50.000 veriyi 10 dakikada sıfır kayıpla aktararak bu korkuyu tamamen yok eder.
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core Platform • Canlı MVP Yetenek Brifingi • Sayfa 2 / 4</div>
+  </div>
+
+  <!-- ==================== SAYFA 3: FİNANS, CRM VE GELİR KORUMA ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>2. Satış Sonrası, Finans ve Gelir Koruma Modülleri</h2>
+        <span class="sub">Derin Muhasebe, CRM & Kaçak Komisyon Avcısı</span>
+      </div>
+
+      <!-- MODÜL 4: MÜŞTERİ 360 CRM -->
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">👥 Modül 4: Müşteri 360° Portföy CRM & Karlılık Analizi</div>
+          <span class="module-badge">Canlı / Çalışıyor</span>
+        </div>
+        <div class="module-row">
+          <strong>• Ne Yapıyor?:</strong> Müşterinin sadece adını-telefonunu değil; tüm sigorta geçmişini, aile bağlarını ve finansal karlılığını tek bir profilde toplar.
+        </div>
+        <div class="module-row">
+          <strong>• Nasıl Çalışıyor?:</strong> Müşterinin Hasar/Prim Oranını (Loss Ratio - acenteye para mı kazandırıyor yoksa zarar mı ettiriyor?) hesaplar, VIP rozeti atar ve müşteriye özel <strong>AI Çapraz Satış Önerisi</strong> sunar <em>(Örn: "Bu müşterinin kaskosu var ama Tamamlayıcı Sağlığı yok; %40 indirimli teklif sunun")</em>. Ayrıca müşteriyi acente içindeki belirli personele (MT) zimmetler.
+        </div>
+        <div class="revolution-box">
+          <strong>💡 Neden Devrim?:</strong> Personel işten ayrılsa bile müşteri geçmişi ve kurumsal hafıza acentenin kasasında kalır. Müşteri başı ciro (LTV) %45 artar.
+        </div>
+      </div>
+
+      <!-- MODÜL 5: OTONOM KOMİSYON AVCISI -->
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">⚖️ Modül 5: Otonom Komisyon Avcısı (Revenue Reconciliation Auditor)</div>
+          <span class="module-badge">Canlı / Çalışıyor</span>
+        </div>
+        <div class="module-row">
+          <strong>• Ne Yapıyor?:</strong> Sigorta şirketlerinin acenteye her ay gönderdiği hakediş ekstrelerindeki gizli kesintileri ve eksik yatan komisyonları kuruşu kuruşuna denetler.
+        </div>
+        <div class="module-row">
+          <strong>• Nasıl Çalışıyor?:</strong> Acentenin kendi kestiği poliçeler ile şirketin gönderdiği Excel ekstresini saniyeler içinde çapraz eşleştirir (Reconciliation). Hatalı iptal cezalarını, eksik uygulanan meslek kampanyalarını (%15 yerine %11 basılması) yakalar. Tek tıkla Türk Ticaret Kanunu (TTK) Madde 102 uyumlu resmi antetli itiraz dilekçesini ve şirkete atılacak hazır e-postayı basar.
+        </div>
+        <div class="revolution-box">
+          <strong>💡 Neden Devrim?:</strong> Yılda 50M ₺ prim üreten bir acentenin masada unuttuğu <strong>yıllık 300.000 ₺ - 600.000 ₺ net parasını</strong> geri toplar. Yazılım ilk aydan kendi bedelini çıkarır (Profit Center).
+        </div>
+      </div>
+
+      <!-- MODÜL 6: YÖNETİCİ KOKPİTİ & WHATSAPP -->
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">📲 Modül 6: Yönetici Kokpiti & 1-Tık WhatsApp Tecdit Radarı</div>
+          <span class="module-badge">Canlı / Çalışıyor</span>
+        </div>
+        <div class="module-row">
+          <strong>• Ne Yapıyor?:</strong> Acente patronunun cep telefonundan veya bilgisayarından anlık şube cirolarını, vadesi yaklaşan poliçeleri ve personelin satış hızını izlemesini sağlar.
+        </div>
+        <div class="module-row">
+          <strong>• Nasıl Çalışıyor?:</strong> Süresi bitmek üzere olan poliçeleri kırmızı alarmla listeler (Tecdit Radarı). Patron veya personel tek tıkla müşteriye WhatsApp üzerinden: <em>"Sayın Ahmet Bey, poliçeniz 3 gün sonra bitiyor; en uygun yenileme teklifiniz hazırlandı, incelemek ve onaylamak için tıklayın"</em> mesajı ve linki yollar.
+        </div>
+        <div class="revolution-box">
+          <strong>💡 Neden Devrim?:</strong> Reaktif sigortacılığı bitirir; müşterinin başka acenteye veya internete kaçmasını (churn) engelleyerek poliçe yenileme oranını %85'in üzerine çıkarır.
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core Platform • Canlı MVP Yetenek Brifingi • Sayfa 3 / 4</div>
+  </div>
+
+  <!-- ==================== SAYFA 4: KATAR KARŞILIĞI & ÖZET ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>3. Bu Modüller Katar Pazarında Neyi Çözüyor? (Saha Gücü)</h2>
+        <span class="sub">Katar'daki Muhataplara Karşı Elimiz Neden Çok Güçlü?</span>
+      </div>
+
+      <div class="highlight-banner" style="margin-top: 0; background: #fdf2f4; border-color: #fce7eb;">
+        <div class="highlight-title" style="color: #8b1538;">🇶🇦 Katar'da Masaya Oturduğunuzda Söyleyeceğiniz 4 Net Gerçek:</div>
+        <div style="font-size: 11px; color: #4c0519; line-height: 1.5;">
+          Katar'daki sigorta brokerları ve şirketleri şu an yabancı hantal yazılımlara (Oracle, eski sistemler) veya manuel Excel tablolarına bağımlı durumdalar. Bizim çalışan MVP'miz tam olarak onların güncel regülasyon tıkanıklıklarını çözer:
+        </div>
+      </div>
+
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Bizim Hazır Modülümüz</th>
+            <th>Katar Sigorta Pazarındaki Doğrudan Çözümü</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>AI Belge Okuma (OCR)</strong></td>
+            <td>Katar QID kimliklerini ve araç kayıt kartlarını 2 saniyede okuyarak brokerların poliçe kesme süresini 15 dakikadan 2 dakikaya indirir.</td>
+          </tr>
+          <tr>
+            <td><strong>Dinamik Çoklu Teklif</strong></td>
+            <td>Katar'da yabancılara zorunlu kılınan <strong>Dhaman Zorunlu Sağlık Sigortası</strong> ve kasko tekliflerini tek tıkla konsolide eder.</td>
+          </tr>
+          <tr>
+            <td><strong>Otonom Komisyon Avcısı</strong></td>
+            <td>Katar Sigorta Şirketleri (QIC, Doha Insurance, QLM vb.) ile çalışan yerel brokerların hakediş ekstrelerindeki komisyon kayıplarını denetler.</td>
+          </tr>
+          <tr>
+            <td><strong>Portföy Göç Sihirbazı</strong></td>
+            <td>Katar'da yeni açılan veya sistem değiştirmek isteyen brokerların Excel verilerini tek tıkla Geoway adres formatına uyarlayarak içeri alır.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="section-header" style="margin-top: 10px;">
+        <h2>Regülasyon ve Güvenlik Uyumu (QCB & NCSA)</h2>
+        <span class="sub">Yasal İzin ve Veri Saklama</span>
+      </div>
+
+      <div class="module-card" style="border-left: 3px solid #8b1538; margin-bottom: 6px;">
+        <div style="font-weight: 700; color: #8b1538; font-size: 11.5px; margin-bottom: 2px;">
+          🛡️ NCSA Cloud Policy V1.3 & PDPPL Law No. 13 Uyumu:
+        </div>
+        <div style="font-size: 10.8px; color: #334155; line-height: 1.45;">
+          Katar kanunları gereği müşteri verisi ülke dışına çıkarılamaz (5M QAR ceza riski). Mimarimiz **Doha Cloud (GCP/Azure Doha)** yerel sunucularında çalışacak şekilde izole edilmiştir. Sistem PII veri maskeleme kalkanı içerir.
+        </div>
+      </div>
+
+      <div class="highlight-banner" style="margin-top: 8px; padding: 9px 13px;">
+        <div class="highlight-title" style="font-size: 11.5px;">🎯 30 Saniyelik Kapanış Cümlesi (Masada Doğrudan Okunabilir):</div>
+        <div style="font-size: 11px; color: #1e3a8a; line-height: 1.5;">
+          "Biz Katar'a sıfırdan kod yazmaya gelmiyoruz. Türkiye’nin en zorlu sigorta pazarında test edilmiş; OCR belge okuması, çoklu teklif motoru, otonom komisyon denetimi ve göç sihirbazı çalışan hazır bir Core InsurTech ERP omurgasına sahibiz. QCB Sandbox ve QDB FinTech desteğiyle bu sistemi 1 ay içinde Doha Cloud üzerinde yerel bir pilot brokerla canlıya alabiliriz."
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core Platform • Canlı MVP Yetenek Brifingi • Sayfa 4 / 4</div>
+  </div>
+
+</body>
+</html>

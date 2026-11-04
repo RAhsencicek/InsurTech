@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Otonom Komisyon Avcısı - Strateji, Mimari ve Sektörel Rapor</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm 14mm 12mm 14mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      background-color: #ffffff;
+      line-height: 1.45;
+      font-size: 11.6px;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .page-container {
+      page-break-after: always;
+      height: 98vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .page-container:last-child {
+      page-break-after: avoid;
+    }
+    
+    /* Cover Page */
+    .cover-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 44px;
+      background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    
+    .badge-primary { background-color: #3b82f6; color: #ffffff; }
+    .badge-emerald { background-color: #10b981; color: #ffffff; }
+    .badge-amber { background-color: #f59e0b; color: #ffffff; }
+    .badge-purple { background-color: #8b5cf6; color: #ffffff; }
+    .badge-rose { background-color: #e11d48; color: #ffffff; }
+    
+    .cover-title {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 18px 0 10px 0;
+      letter-spacing: -0.02em;
+    }
+    
+    .cover-subtitle {
+      font-size: 16px;
+      color: #94a3b8;
+      font-weight: 400;
+      line-height: 1.4;
+      max-width: 600px;
+    }
+    
+    .cover-meta {
+      border-top: 1px solid #334155;
+      padding-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    
+    .meta-item { font-size: 10.5px; color: #94a3b8; }
+    .meta-val { font-size: 12.5px; font-weight: 600; color: #f8fafc; margin-top: 4px; }
+    
+    /* Section Headers */
+    .section-header {
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 4px;
+      margin-top: 2px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    
+    .section-header h2 {
+      font-size: 16.5px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    
+    .section-header .sub {
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .qa-box {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #3b82f6;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+    }
+    
+    .qa-question {
+      font-size: 12.8px;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .qa-answer {
+      color: #334155;
+      font-size: 11.6px;
+      line-height: 1.5;
+    }
+
+    /* Scenario Styling */
+    .scenario-container {
+      background: #ffffff;
+      border: 1.5px solid #3b82f6;
+      border-radius: 10px;
+      padding: 12px 15px;
+      margin: 9px 0;
+      page-break-inside: avoid;
+    }
+
+    .scenario-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #1e40af;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #e0e7ff;
+      padding-bottom: 5px;
+    }
+
+    .scenario-timeline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .scenario-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 11.2px;
+    }
+
+    .scenario-card strong {
+      display: block;
+      color: #0f172a;
+      font-size: 11.8px;
+      margin-bottom: 2px;
+    }
+
+    .scenario-card.success {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+    }
+
+    .scenario-card.success strong {
+      color: #065f46;
+    }
+    
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    
+    .metric-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 9px;
+      text-align: center;
+    }
+    
+    .metric-number {
+      font-size: 19px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 1px;
+    }
+    
+    .metric-label {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+    
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 9px 0;
+      font-size: 11.2px;
+      page-break-inside: avoid;
+    }
+    
+    .table-custom th {
+      background-color: #0f172a;
+      color: #ffffff;
+      padding: 6px 9px;
+      font-weight: 600;
+      text-align: left;
+    }
+    
+    .table-custom td {
+      padding: 6px 9px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .table-custom tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    
+    .highlight-banner {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 9px 13px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    
+    .highlight-title {
+      font-weight: 800;
+      color: #1e40af;
+      font-size: 12.5px;
+      margin-bottom: 3px;
+    }
+
+    /* Grid 2x2 for Case studies */
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+
+    .case-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      padding: 8px 11px;
+      font-size: 11px;
+    }
+
+    .case-title {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 11.5px;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .three-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+
+    .pillar-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-top: 3px solid #0f172a;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-size: 11px;
+    }
+
+    .pillar-title {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 11.5px;
+      margin-bottom: 4px;
+    }
+    
+    .flow-step {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      margin-bottom: 7px;
+      page-break-inside: avoid;
+    }
+    
+    .step-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 10.5px;
+      flex-shrink: 0;
+    }
+    
+    .legal-box {
+      background-color: #fefce8;
+      border: 1px solid #fef08a;
+      border-left: 4px solid #ca8a04;
+      border-radius: 7px;
+      padding: 8px 12px;
+      font-size: 10.8px;
+      color: #713f12;
+      margin: 7px 0;
+      page-break-inside: avoid;
+    }
+
+    .footer-note {
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 6px;
+      font-size: 10px;
+      color: #94a3b8;
+    }
+
+    /* Story Card styling for Appendix */
+    .story-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-bottom: 8px;
+    }
+
+    .story-card-header {
+      font-weight: 800;
+      color: #0f172a;
+      font-size: 11.8px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== SAYFA 1: KAPAK ==================== -->
+  <div class="page-container">
+    <div class="cover-card">
+      <div>
+        <span class="badge badge-emerald">Stratejik İnovasyon & Ürün Dokümanı</span>
+        <h1 class="cover-title">OTONOM KOMİSYON AVCISI<br>(REVENUE RECONCILIATION ENGINE)</h1>
+        <p class="cover-subtitle">
+          Sigorta Sektöründeki Görünmeyen Gelir Kaçaklarının Tespiti, Şirket Politikası vs Kanun Hiyerarşisi (SEDDK C.4), Kural Doğrulama Mimarisi (VAR Sistemi), Hukuki Dayanak (TTK 102) ve 4 Büyük Saha İncelemesi
+        </p>
+      </div>
+      
+      <div>
+        <div style="background: rgba(255,255,255,0.06); padding: 18px 22px; border-radius: 10px; margin-bottom: 22px; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="font-size: 13px; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">🚀 Temel Satış Tezi (Value Proposition)</div>
+          <div style="font-size: 11.8px; color: #cbd5e1; line-height: 1.6;">
+            "Bu sistem klasik bir yazılım gideri (Cost Center) değildir; sigorta şirketlerinin acentelerden kestiği haksız veya hatalı komisyonları ilk 30 günde kuruşu kuruşuna geri toplayarak kendi ücretini ilk aydan çıkaran otonom bir kâr merkezidir (Profit Center)."
+          </div>
+        </div>
+        
+        <div class="cover-meta">
+          <div class="meta-item">
+            <div>YAYINLAYAN</div>
+            <div class="meta-val">InsurTech Core Labs</div>
+          </div>
+          <div class="meta-item">
+            <div>HEDEF PAZAR</div>
+            <div class="meta-val">Türkiye (16.000 Acente) & GCC (Katar QCB)</div>
+          </div>
+          <div class="meta-item">
+            <div>TARİH / SÜRÜM</div>
+            <div class="meta-val">Ekim 2026 / v2.8 Complete Field Analysis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SAYFA 2: TANIM & CANLI SENARYO ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>1. Otonom Komisyon Avcısı Nedir? (Yalın Tanım & Senaryo)</h2>
+        <span class="sub">Bölüm 1 / 5</span>
+      </div>
+
+      <div class="qa-box">
+        <div class="qa-question">
+          <span>💡 Sistem Tanımı & Temel Çalışma Mantığı</span>
+        </div>
+        <div class="qa-answer">
+          Otonom Komisyon Avcısı; <strong>acentenizin kasasını 7/24 denetleyen dijital bir gelir güvence motorudur.</strong>
+          <br><br>
+          Perakende sektöründeki kasa-fiş mutabakatı mantığıyla çalışır: Nasıl ki perakendede raf fiyatı ile kasa fişi arasındaki tutarsızlıklar anında tespit ediliyorsa; bu sistem de sigorta şirketlerinin her ay acentelere ödediği komisyon hakedişlerini satır satır denetler. <strong>Gözden kaçan tarife sapmalarını, hatalı iptal kesintilerini ve sözleşme dışı havuz kesintilerini kuruşu kuruşuna tespit ederek acente portföyüne geri kazandırır.</strong>
+        </div>
+      </div>
+
+      <div class="scenario-container">
+        <div class="scenario-title">
+          <span>📖 Örnek Vaka İncelemesi: 1.000 Poliçelik Portföyde Masada Kalan 42.000 ₺</span>
+        </div>
+
+        <div class="scenario-timeline">
+          <div class="scenario-card">
+            <strong>1. Üretim & Tahakkuk</strong>
+            Acente aylık 1.000 adet poliçe üretir. Sözleşmedeki komisyon oranlarına göre şirketten tahakkuk eden hakediş: <strong>150.000 ₺</strong>.
+          </div>
+          <div class="scenario-card">
+            <strong>2. Şirket Hakediş Ekstresi</strong>
+            Ay sonu şirketten gelen cari ödeme <strong>108.000 ₺</strong> olarak gerçekleşir ve 2.000 satırlık karmaşık bir mutabakat ekstresi iletilir.
+          </div>
+          <div class="scenario-card">
+            <strong>3. Geleneksel Denetim Yetersizliği</strong>
+            2.000 satırlık verinin manuel denetimi iş gücünü aştığı için acente yönetimi <strong>42.000 ₺ farkı sorgulayamadan kabul eder.</strong>
+          </div>
+          <div class="scenario-card success">
+            <strong>4. Otonom Mutabakat (3 Saniye)</strong>
+            Ekstre sisteme aktarılır. Motor 3 saniye içinde 42.000 ₺'lik uyuşmazlığın kök nedenlerini belirler ve yasal itiraz dosyasını üretir.
+          </div>
+        </div>
+
+        <div style="margin-top: 8px; background: #eff6ff; border-radius: 6px; padding: 7px 11px; font-size: 11px; color: #1e3a8a;">
+          <strong>🔍 Saniyeler İçinde Belirlenen Kaçak Dağılımı:</strong>
+          <ul style="margin: 2px 0 0 0; padding-left: 16px;">
+            <li><strong>Tarife Sapması (-18.000 ₺):</strong> Doktor kaskolarında sözleşme komisyonu %15 iken şirket sisteminde sehven %10 baz alınmış.</li>
+            <li><strong>Hatalı İptal Kesintisi (-14.000 ₺):</strong> Müşteri 5. günde araç satışı nedeniyle iptal etmiş; acenteden 5 günlük yerine tam yıl kesilmiş.</li>
+            <li><strong>Sözleşme Dışı Havuz Kesintisi (-10.000 ₺):</strong> Acentelik sözleşmesinde yer almayan ek altyapı fonu hakedişten düşülmüş.</li>
+          </ul>
+          <div style="margin-top: 3px; font-weight: 700; color: #16a34a;">
+            ➔ Sonuç: Sistem tarafından üretilen resmi itiraz ile 42.000 ₺ net tutar acenteye iade ettirilir.
+          </div>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-number">%3.8</div>
+          <div class="metric-label">Ortalama Kaçak Oranı</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number">420.000 ₺</div>
+          <div class="metric-label">Yıllık Kayıp Komisyon (Ort.)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number">&lt; 30 Gün</div>
+          <div class="metric-label">Yazılım ROI Geri Dönüşü</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core ERP • Sayfa 2 / 10</div>
+  </div>
+
+  <!-- ==================== SAYFA 3: SESSİZ KESİNTİLER & ŞİRKET POLİTİKASI ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>2. Sessiz Kesintiler & Şirket Politikası Paradoksu</h2>
+        <span class="sub">Bölüm 2 / 5</span>
+      </div>
+
+      <!-- 2x2 Case Grid -->
+      <div class="case-grid">
+        <div class="case-card">
+          <div class="case-title">🛑 1. İptal-İade Süreçleri (Pro-Rata İhlali)</div>
+          Poliçe erken feshedildiğinde, yasal olarak sadece geçen sürenin komisyonu düşülmelidir. Ancak şirket otomasyonları standart ceza kurgusuyla <strong>tüm yılın komisyonunu acenteden geri tahsil eder.</strong>
+        </div>
+        <div class="case-card">
+          <div class="case-title">📦 2. Zeyilname (Ek Prim) Tahakkuk Kaybı</div>
+          Müşteri sonradan ek teminat satın alır ve ek prim öder. Bu ek primden doğan acente komisyonu, şirketlerin eski muhasebe yazılımlarında <strong>hakedişe bağlanmayarak askıda bırakılır.</strong>
+        </div>
+        <div class="case-card">
+          <div class="case-title">📉 3. Hatalı Havuz Sınıflandırması</div>
+          Hususi otomobiller, sistem kayıtlarındaki geçmiş eşleşmeler nedeniyle yanlışlıkla 'Riskli Havuz' olarak etiketlenir ve acenteye %15 yerine %8 komisyon ödenir. Aradaki %7 kaybolur.
+        </div>
+        <div class="case-card">
+          <div class="case-title">👻 4. Sözleşme Dışı Fon / Tarife Sapmaları</div>
+          Sözleşmede taahhüt edilen meslek grubu veya kampanya komisyonları sistem güncellemelerinde atlanarak acente standart tarifeye düşürülür.
+        </div>
+      </div>
+
+      <!-- HUKUKİ BOYUT -->
+      <div class="qa-box" style="border-left-color: #f59e0b; background-color: #fffbeb;">
+        <div class="qa-question" style="color: #92400e;">
+          <span>⚖️ Hukuki Boyut: Şirket İç Politikaları Kanun ve Sözleşmenin Üzerinde midir?</span>
+        </div>
+        <div class="qa-answer" style="color: #78350f;">
+          <strong>Kesinlikle HAYIR. Şirket iç uygulamaları kanun ve sözleşme hükümlerini geçersiz kılamaz.</strong>
+          <br><br>
+          <strong>1. Mevzuat Hiyerarşisi (SEDDK Genel Şartları Madde C.4):</strong>  
+          Emredici sigortacılık mevzuatı gereğince araç satışı nedeniyle yapılan iptallerde sözleşme <strong>GÜN ESASINA GÖRE (pro-rata)</strong> feshedilir. Şirketlerin iç politika gerekçesiyle acente komisyonunun tamamını geri çekmesi hukuken hükümsüzdür.
+          <br><br>
+          <strong>2. Sektörel Dinamik ve Blöf Mekanizması:</strong>  
+          Finans sektöründeki haksız masraf uygulamalarında olduğu gibi; itiraz edilmeyen kesintiler şirket bilançosunda kalırken, yasal gerekçesi sunularak itiraz edilen durumlarda şirketler yasal yaptırım riskinden kaçınmak için iadeyi derhal gerçekleştirir.
+          <br><br>
+          <strong>3. Tahsilat Süreci:</strong>  
+          Sistemimiz, SEDDK C.4 ve TTK 102 maddelerine dayanan resmi itiraz bordrosunu üretir. Şirket yetkilileri bu yasal döküm karşısında ihtilaf yaratmaksızın, bir sonraki hakediş döneminde <strong>"Komisyon Düzeltme Zeyili"</strong> düzenleyerek tutarı acente carisine iade eder.
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core ERP • Sayfa 3 / 10</div>
+  </div>
+
+  <!-- ==================== SAYFA 4: KURAL PARADOKSU & VAR MİMARİSİ ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>3. Kural Doğrulama Mimarisi & Segmentasyon Tespiti</h2>
+        <span class="sub">Bölüm 3 / 5</span>
+      </div>
+
+      <div class="qa-box">
+        <div class="qa-question">🏛️ Kural Doğrulama Metodolojisi: Bağımsız Üç Ayaklı Eşleme (VAR Modeli)</div>
+        <div class="qa-answer">
+          Sistem kural tanımlarını sigorta şirketlerinin hatalı web servislerinden çekmez; acente personelinin manuel kural girmesine de ihtiyaç duymaz. Süreç, <strong>tarafsız üç ayaklı bir denetim motoru</strong> üzerinden yürütülür:
+        </div>
+      </div>
+
+      <div class="three-pillars">
+        <div class="pillar-card">
+          <div class="pillar-title">1. AYAK: Hukuki Sözleşme</div>
+          Acentenin noter onaylı ana sözleşme oranları (Allianz Kasko %15, Doktor %18 vb.). Platformdaki hazır şablonlar ile bir kez tanımlanır.
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-title">2. AYAK: Kilitlenen Beklenti</div>
+          Poliçe tanzim edildiği anda sistem beklenen komisyonu bağımsız olarak kaydeder: <em>"Bu poliçenin hakedişi 1.800 ₺'dir."</em>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-title">3. AYAK: Şirket Ekstresi</div>
+          Ay sonu şirketin sunduğu ekstre verisi: <em>"Ödenen: 1.200 ₺"</em>. Sistem iki veriyi eşler: 1.800 - 1.200 = <strong>600 ₺ Uyuşmazlık!</strong>
+        </div>
+      </div>
+
+      <div class="qa-box" style="margin-top: 8px;">
+        <div class="qa-question">🎯 Segmentasyon ve Meslek Klozlarının Tespiti (`IND-DOKTOR-2026`)</div>
+        <div class="qa-answer">
+          Müşteri segmentasyonunun ve kampanya haklarının takibi operasyonel yük oluşturmadan otomatik olarak gerçekleşir:
+          <br><br>
+          <strong>1. Müşteri 360 Kartı Üzerinden Otomasyon:</strong> Sigortalı profili oluşturulurken meslek bilgisi tanımlanır. Teklif motoru (`MultiQuoteEngineView`) bu bilgiyi okuyarak teklif aşamasında müşteriye hak ettiği indirimi, acenteye ise sözleşmedeki teşvik komisyonunu otomatik olarak bağlar.
+          <br><br>
+          <strong>2. Şirket Portallarından Kesilen Poliçelerin Ayrıştırılması:</strong> Poliçe şirket ekranından kesilse dahi, tanzim edilen poliçe metninde <strong>`Kloz Kodu: IND-DOKTOR-2026`</strong> ibaresi kanunen yer alır. Sistem poliçe verisini içe aktarırken bu kloz kodunu tarar ve komisyon oranını otomatik olarak kampanyalı seviyeden denetler.
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core ERP • Sayfa 4 / 10</div>
+  </div>
+
+  <!-- ==================== SAYFA 5: RAKİPLER & GLOBAL BAŞARI ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>4. Piyasadaki Mevcut Yazılımların Zafiyetleri & Global Kıyaslama</h2>
+        <span class="sub">Bölüm 4 / 5</span>
+      </div>
+
+      <div class="qa-box">
+        <div class="qa-question">⚠️ Mevcut Çözümlerin (Polisoft, Polixir, PİVO) Yapısal Yetersizlikleri</div>
+        <div class="qa-answer">
+          <ul>
+            <li><strong>Geleneksel Sigorta ERP'leri (Polisoft, Polixir):</strong> Yalnızca cari bakiye takibi yapabilirler (örn: <em>"Alacak: 200.000 ₺, Tahsilat: 184.250 ₺"</em>). Ekstre içerisindeki binlerce satırı poliçe klozları ve zeyil hareketleriyle çapraz denetime sokamazlar. Eski dosya mimarileri bu ölçekte veri işlemesine uygun değildir.</li>
+            <li><strong>Teklif Botları (PİVO, Doğanium):</strong> Yalnızca şirket ekranlarından fiyat toplayan botlardır; muhasebe ve mutabakat derinlikleri bulunmaz.</li>
+            <li><strong>Sigorta Şirketi Portalları:</strong> Doğası gereği hiçbir sigorta şirketi kendi aleyhine uyuşmazlık raporu üreten bir aracı acentenin kullanımına sunmaz.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa-box">
+        <div class="qa-question">📉 Manuel Denetim Yöntemlerinin (Excel VLOOKUP) Sürdürülemezliği</div>
+        <div class="qa-answer">
+          <strong>Acentelerin %80'i denetim yapamamaktadır:</strong> Aylık binlerce poliçenin manuel incelenmesi yüzlerce saat gerektirdiğinden doğrudan cari bakiye kabul edilir.  
+          <strong>Kalan %20'lik kesim ise:</strong> Muhasebe personelini Excel'de formüllerle günlerce süren verimsiz bir iş gücüne maruz bırakır. Bu süreçte insan hatası nedeniyle zeyil ve tarife kaçaklarının büyük kısmı gözden kaçar.
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top: 10px;">
+        <h2>Küresel Başarı Modelleri (InsurTech Benchmarkları)</h2>
+        <span class="sub">Uluslararası Başarı Kriterleri</span>
+      </div>
+
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Bölge</th>
+            <th>İş Modeli & Çözüm Alanı</th>
+            <th>Pazar Konumu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>AgentSync</strong></td>
+            <td>ABD (Unicorn)</td>
+            <td>Broker komisyon mutabakatı ve yasal uyum otomasyonu ile <strong>1.2 Milyar $ değerlemeye</strong> ulaştı.</td>
+            <td>%98 Kurumsal Retansiyon</td>
+          </tr>
+          <tr>
+            <td><strong>Commissionly</strong></td>
+            <td>İngiltere / AB</td>
+            <td>Komisyon gelir kaçaklarını otomatik geri kazandırma odağıyla binlerce finansal aracıya hizmet vermektedir.</td>
+            <td>%95+ Müşteri Memnuniyeti</td>
+          </tr>
+          <tr>
+            <td><strong>Vymo / Performio</strong></td>
+            <td>Global Enterprise</td>
+            <td>Bağımsız hakediş doğrulama mimarileriyle broker operasyonlarındaki gelir kaçaklarını %99.2 oranında engeller.</td>
+            <td>Fortune 500 Tercihi</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="footer-note">InsurTech Core ERP • Sayfa 5 / 10</div>
+  </div>
+
+  <!-- ==================== SAYFA 6: HUKUKİ KALKAN & YOL HARİTASI ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>5. Yasal Altyapı (TTK 102) & MVP Entegrasyon Takvimi</h2>
+        <span class="sub">Bölüm 5 / 5</span>
+      </div>
+
+      <div class="qa-box">
+        <div class="qa-question">📢 Sektörel İtirazlar ve B2B Dinamikleri</div>
+        <div class="qa-answer">
+          TÜSAF (Türkiye Sigorta Acenteleri Federasyonu) ve SAİK platformlarında acente yönetimlerinin en temel ortak şikayeti; şirketlerin havuz kesintilerini ve tarife parametrelerini tek taraflı uygulayarak komisyon marjlarını daraltmasıdır. Sektörel forumlarda mevcut yazılımların ekstre kontrolü yapamaması en büyük maliyet unsuru olarak vurgulanmaktadır.
+        </div>
+      </div>
+
+      <div class="legal-box">
+        <strong>⚖️ Hukuki Kalkan: Türk Ticaret Kanunu (TTK) Madde 102</strong><br>
+        <em>"Acente, aracılık ettiği işlemler dolayısıyla hak kazandığı ücrete (komisyona), sözleşmenin kurulması anında hak kazanır. Müvekkil, en geç üç ay içinde komisyon bordrosunu vermekle yükümlüdür. Yapılan haksız kesintilere karşı acentenin itiraz ve tahsil hakkı saklıdır."</em>
+      </div>
+
+      <div class="section-header" style="margin-top: 10px;">
+        <h2>MVP Entegrasyon Takvimi</h2>
+        <span class="sub">Uygulama Adımları</span>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-circle">1</div>
+        <div>
+          <strong>Aşama 1: UI & Kokpit Tasarımı (Tamamlandı):</strong>
+          <div style="font-size: 10.8px; color: #475569;">
+            Denetim kokpiti, kaçak özet kartları, resmi TTK 102 itiraz modalı ve PDF önizleme ekranı [`CommissionAuditorView`](file:///Users/mac/InsurTech/app/src/views/CommissionAuditorView.tsx).
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-circle">2</div>
+        <div>
+          <strong>Aşama 2: Canlı Veri Simülasyonu (Hemen Canlıya Alınabilir):</strong>
+          <div style="font-size: 10.8px; color: #475569;">
+            Örnek Allianz ve Anadolu Sigorta ekstrelerinin sisteme aktarılarak 42.000 ₺ kaçak tespitinin etkileşimli gösterimi.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-circle">3</div>
+        <div>
+          <strong>Aşama 3: Dinamik Excel Parser (Sıradaki Adım):</strong>
+          <div style="font-size: 10.8px; color: #475569;">
+            Acentelerin kendi bilgisayarlarındaki ham XLSX ekstrelerini sürükleyip saniyeler içinde mutabakat raporu alabilmesi.
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-banner" style="margin-top: 8px; padding: 9px 13px;">
+        <div class="highlight-title">🎯 Değer Önerisi ve Pazar Konumlandırması:</div>
+        <div style="font-size: 11.2px; color: #334155;">
+          Geleneksel yazılımların aksine, platformumuz doğrudan kendini amorti eden bir gelir koruma yatırımıdır: <strong>"Son bir aylık ekstrelerinizi yükleyin; 30 gün içinde sistem maliyetini aşan haksız kesintiyi tespit edemezsek kullanım 1 yıl ücretsizdir."</strong> Bu taahhüt, acente yönetimlerinin satış direncini tamamen ortadan kaldırmaktadır.
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core ERP Platform • Gizli & Kurumsal • Tüm Hakları Saklıdır © 2026 • Sayfa 6 / 10</div>
+  </div>
+
+  <!-- ==================== SAYFA 7: EK BÖLÜM 1 - DOKTOR KAMPANYASI ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>EK BÖLÜM: GERÇEK SAHA VAKALARI & ÖRNEK OLAYLAR</h2>
+        <span class="sub"><span class="badge badge-primary">Saha İncelemesi 1</span></span>
+      </div>
+
+      <div class="highlight-banner" style="margin-top: 0; background: #f0fdf4; border-color: #bbf7d0;">
+        <div class="highlight-title" style="color: #166534;">🩺 Vaka 1: Doktor Kaskolarında Masada Kalan 30.000 ₺ (Meslek Kampanyası Sapması)</div>
+        <div style="color: #14532d; font-size: 11px;">
+          Acentenin müşteriye indirim sağlarken, şirketin taahhüt ettiği yüksek komisyonu sistemsel hata nedeniyle alamaması vakası.
+        </div>
+      </div>
+
+      <!-- 1. Terimler -->
+      <div class="story-card" style="border-left: 3px solid #16a34a;">
+        <div class="story-card-header" style="color: #166534;">1. Önce Temel Kavramları Netleştirelim (3 Basit Terim)</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          • <strong>Prim:</strong> Müşterinin cebinden çıkan sigorta fiyatıdır. <em>(Örn: Doktorun kasko için ödediği 10.000 ₺)</em><br>
+          • <strong>Komisyon:</strong> Şirketin poliçeyi kestiği için acenteye verdiği hak ediş / kazançtır. <em>(Standart oran: %12 = 1.200 ₺)</em><br>
+          • <strong>Kampanya Teşviki (Bonus):</strong> Şirketin iyi müşteri getiren acenteye verdiği ek paydır. <em>("Bana doktor getirirsen komisyonunu %18 yaparım")</em>
+        </div>
+      </div>
+
+      <!-- 2. Olay Örgüsü -->
+      <div class="story-card" style="border-left: 3px solid #2563eb;">
+        <div class="story-card-header" style="color: #1e40af;">2. Sahadaki Gerçek Olay Örgüsü (Kadıköy Acentesi Örneği)</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Sigorta şirketleri doktorları çok sever; çünkü doktorlar istatistiksel olarak arabayı çok dikkatli kullanır ve nadiren kaza yaparlar. Şirket için bu kitle "altın portföy"dür. Bu yüzden sigorta şirketi acenteye şu vaatte bulunur: <strong>"Ahmet Bey, normal vatandaşa kasko satarsan komisyonun %12'dir. Ama bana doktor müşteri getirirsen, sana ödül olarak %18 komisyon ödeyeceğim!"</strong>
+          <br><br>
+          Acente sahibi Ahmet Bey ekibine talimat verir. Ekip hastaneleri dolaşır ve tam <strong>50 doktora kasko keser.</strong><br>
+          • Birim Kasko Primi: 10.000 ₺<br>
+          • Acentenin Hak Ettiği Komisyon (%18): 1.800 ₺<br>
+          • <strong>Ahmet Bey'in Hak Ettiği Toplam Para: 50 x 1.800 ₺ = 90.000 ₺!</strong>
+        </div>
+      </div>
+
+      <!-- 3. Hata Nerede Çıkıyor -->
+      <div class="story-card" style="border-left: 3px solid #dc2626;">
+        <div class="story-card-header" style="color: #991b1b;">3. Para Nerede ve Nasıl Buharlaşıyor?</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Poliçe kesilirken müşteriye doktor indirimi yansır. Ancak şirketin merkezindeki eski muhasebe yazılımı, poliçeyi acentenin aylık hakediş ekstresine işlerken kampanya kodunu atlar ve standart oran olan <strong>%12'yi</strong> basar!<br>
+          • Şirketin Ahmet Bey'e fiilen yatırdığı: 50 x 1.200 ₺ = <strong>60.000 ₺</strong><br>
+          • <strong>Aradaki Kayıp: 30.000 ₺ sessizce şirkette kalır!</strong>
+        </div>
+      </div>
+
+      <!-- 4. Neden Fark Edilemez -->
+      <div class="story-card" style="border-left: 3px solid #f59e0b;">
+        <div class="story-card-header" style="color: #92400e;">4. Acente Patronu Bunu Neden Gözüyle Fark Edemez?</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Çünkü Ahmet Bey o ay dükkanda toplam 1.500 poliçe kesmiştir. Ay sonu banka hesabına tek kalemde toplu <strong>350.000 ₺</strong> para yatar. Arkasından da 2.000 satırlık devasa bir Excel gelir. Ahmet Bey o Excel'e baktığında "Acaba Dr. Mehmet Bey'in poliçesinde komisyon 18 yerine 12 mi yazılmış?" diye 50 doktoru tek tek gözle arayamaz. Paranın yattığını görünce tam ödendi zanneder; oysa 30.000 ₺ içeride unutulmuştur!
+        </div>
+      </div>
+
+      <!-- 5. Otonom Çözüm -->
+      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 7px 11px; font-size: 11px; color: #1e40af;">
+        <strong>🚀 Otonom Çözüm:</strong> Sistem poliçedeki <code>IND-DOKTOR-2026</code> klozunu yakalar. Sözleşmedeki %18 ile şirketin ödediği %12'yi saniyede tokuşturur ve masada kalan 30.000 ₺ için resmi itiraz dosyasını üretir.
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core ERP Platform • Saha İncelemeleri Eki • Sayfa 7 / 10</div>
+  </div>
+
+  <!-- ==================== SAYFA 8: EK BÖLÜM 2 - İPTAL İADE ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>EK BÖLÜM: GERÇEK SAHA VAKALARI & ÖRNEK OLAYLAR</h2>
+        <span class="sub"><span class="badge badge-amber">Saha İncelemesi 2</span></span>
+      </div>
+
+      <div class="highlight-banner" style="margin-top: 0; background: #fffbeb; border-color: #fde68a;">
+        <div class="highlight-title" style="color: #92400e;">🛑 Vaka 2: İptal-İade Tuzağı ("10 Günlük Sigortaya 1 Yıllık Ceza")</div>
+        <div style="color: #78350f; font-size: 11px;">
+          Müşterinin arabasını satması üzerine yapılan yasal fesihte, şirketin acenteden tüm yılın komisyonunu geri çekmesi vakası.
+        </div>
+      </div>
+
+      <!-- 1. Olay Örgüsü -->
+      <div class="story-card" style="border-left: 3px solid #d97706;">
+        <div class="story-card-header" style="color: #92400e;">1. Somut Olay Örgüsü (Ahmet Bey ve Müşterisi Mehmet Bey)</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Ahmet Bey, müşterisi Mehmet Bey'e 1 yıllık Kasko satar.<br>
+          • Kaskonun Fiyatı: <strong>36.500 ₺</strong> <em>(Günü tam 100 ₺'ye gelir)</em><br>
+          • Ahmet Bey'in Komisyonu (%10): <strong>3.650 ₺</strong> <em>(Şirket bu parayı acenteye peşin öder)</em><br>
+          Mehmet Bey 10 gün sonra arabasını satar ve noter satış belgesiyle acenteyi arar: <em>"Ahmet Abi arabayı sattım, kaskoyu iptal edelim."</em>
+        </div>
+      </div>
+
+      <!-- 2. Olması Gereken vs Şirket Hatası -->
+      <div class="story-card" style="border-left: 3px solid #dc2626;">
+        <div class="story-card-header" style="color: #991b1b;">2. Kanunen Olması Gereken vs. Şirketin Yaptığı Kesinti</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          • <strong>Kanunen Olması Gereken:</strong> Mehmet Bey arabayı 10 gün kullandı (1.000 ₺). Şirket müşteriye kalan 355 günün parasını iade eder. Ahmet Bey de 10 günlük hizmetinin komisyonunu (100 ₺) cebinde tutar, kalan 3.550 ₺'yi şirkete iade eder.<br>
+          • <strong>Sessiz Kesinti:</strong> Şirketin otomatik muhasebe robotu, iptal butonuna basıldığında noter satışını ayırt etmeden acenteye "kısa dönem cezası" keser ve Ahmet Bey'e ödenen <strong>3.650 ₺ komisyonun TAMAMINI geri çeker!</strong> Ahmet Bey müşteriye 10 gün hizmet verdiği halde cebinden 350 ₺ haksız ceza kesilmiş olur. Ayda 30-40 iptali olan acentede bu her ay <strong>10.000 - 15.000 ₺</strong> buharlaşan para demektir!
+        </div>
+      </div>
+
+      <!-- 3. Şirket Politikası ve Banka Analojisi -->
+      <div class="story-card" style="border-left: 3px solid #2563eb;">
+        <div class="story-card-header" style="color: #1e40af;">3. "Şirketin Politikası Böyleyse Tersini Nasıl Yapıyoruz?" (Banka Aidatı Blöfü)</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          İlk bakışta "Şirket kural koymuşsa acente ne yapabilir?" gibi düşünülür. Oysa durum eskiden bankaların kestiği <strong>"Kredi Kartı Aidatı"</strong> blöfüne benzer:<br>
+          • Bankalar da "Kart aidatı şirket politikamızdır" diyordu. İtiraz etmeyen %80'in parası bankada kalıyordu; ama kanun maddesini gösterip resmi dilekçe veren %20'ye banka anında parasını iade ediyordu!<br>
+          • Sigortada da SEDDK Kasko Genel Şartları <strong>Madde C.4</strong> emredici kanundur: Noter araç satışında poliçe <strong>GÜN ESASINA GÖRE (pro-rata)</strong> feshedilir. Şirket iç politikasıyla kanunu çiğneyemez; böyle bir şirket kuralı kanunen hükümsüzdür.
+        </div>
+      </div>
+
+      <!-- 4. Sahada Nasıl Geri Alınıyor -->
+      <div class="story-card" style="border-left: 3px solid #16a34a;">
+        <div class="story-card-header" style="color: #166534;">4. Sahada Para Nasıl Geri Alınıyor? (Düzeltme Zeyili Süreci)</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Acente patronu şirkete telefon açıp "Paramı niye kestiniz?" derse şirket çalışanı "Politikamız böyle" deyip geçiştirir. Ancak bizim sistemimiz, noter satış belgesi ve <strong>SEDDK C.4 / TTK 102</strong> maddelerini içeren resmi itiraz dosyasını basıp ilettiğinde; şirket yetkilisi ceza yememek için asla tartışmaz. Bir sonraki ayın ekstresine <strong>"Komisyon Düzeltme Zeyili (+3.550 ₺)"</strong> ekleyerek parayı acenteye kuruşu kuruşuna iade eder!
+        </div>
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core ERP Platform • Saha İncelemeleri Eki • Sayfa 8 / 10</div>
+  </div>
+
+  <!-- ==================== SAYFA 9: EK BÖLÜM 3 - ZEYİLNAME UNUTKANLIĞI ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>EK BÖLÜM: GERÇEK SAHA VAKALARI & ÖRNEK OLAYLAR</h2>
+        <span class="sub"><span class="badge badge-purple">Saha İncelemesi 3</span></span>
+      </div>
+
+      <div class="highlight-banner" style="margin-top: 0; background: #faf5ff; border-color: #e9d5ff;">
+        <div class="highlight-title" style="color: #6b21a8;">📦 Vaka 3: Zeyilname (Ek Prim) Unutkanlığı ("Askıda Kalan Sahipsiz Paralar")</div>
+        <div style="color: #581c87; font-size: 11px;">
+          Poliçeye sonradan eklenen teminatların prim tahsilatı yapılmasına karşın, acente komisyonunun şirket sisteminde askıda kalması vakası.
+        </div>
+      </div>
+
+      <!-- 1. Terim -->
+      <div class="story-card" style="border-left: 3px solid #8b5cf6;">
+        <div class="story-card-header" style="color: #6b21a8;">1. Önce Terimi Netleştirelim: "Zeyilname" Nedir?</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Sigortacılıkta <strong>"Zeyilname"</strong>; yürürlükte olan bir poliçeye sonradan yapılan <strong>ekleme, teminat artışı veya güncelleme</strong> işlemidir. Örneğin arabaya yeni bir aksesuar takılması, yeni bir sürücü eklenmesi veya yurt dışı teminatı ilave edilmesi gibi durumlarda zeyil kesilir.
+        </div>
+      </div>
+
+      <!-- 2. Olay Örgüsü -->
+      <div class="story-card" style="border-left: 3px solid #2563eb;">
+        <div class="story-card-header" style="color: #1e40af;">2. Sahadaki Gerçek Olay Örgüsü (Ahmet Bey ve Müşterisi Ali Bey)</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Ali Bey 6 ay önce Ahmet Bey'den arabasına Kasko yaptırmıştır. 6 ay sonra Ahmet Bey'i arar:<br>
+          <em>"Ahmet Abi, arabama 100.000 ₺ değerinde lüks bir ses sistemi ve jant taktırdım. Bir de önümüzdeki ay aracımla Yunanistan'a tatile gideceğim. Kaskoma 'Yurt Dışı Teminatı' ve 'Aksesuar Teminatı' ekleyin."</em><br>
+          Ahmet Bey bilgisayardan kaskoya bu teminatları ekler (yani <strong>Zeyil</strong> keser).<br>
+          • Bu ek teminatlar için şirket Ali Bey'in kredi kartından <strong>10.000 ₺ EK PARA (Ek Prim)</strong> tahsil eder.<br>
+          • Acentelik sözleşmesine göre Ahmet Bey bu 10.000 ₺'den <strong>%15 komisyon (1.500 ₺)</strong> hak eder.
+        </div>
+      </div>
+
+      <!-- 3. Hata Nerede Çıkıyor -->
+      <div class="story-card" style="border-left: 3px solid #dc2626;">
+        <div class="story-card-header" style="color: #991b1b;">3. Para Nerede ve Nasıl Buharlaşıyor?</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Şirket Ali Bey'in kartından 10.000 ₺'yi çeker, kasasına koyar. Ancak şirketin merkezindeki eski muhasebe yazılımı (SAP/AS400), sonradan kesilen bu zeyilleri acentenin aylık ana hakediş ekstresine bağlamayı <strong>"unutur"</strong>. Sektörde buna <strong>"Askıda Kalan Poliçe / Sahipsiz Bakiye (Unallocated Ledger)"</strong> denir.<br>
+          • Şirket Ahmet Bey'e o 1.500 ₺'yi <strong>hiç ödemez!</strong> Para şirketin havuz hesabında sahipsiz bekler.<br>
+          • Ahmet Bey arayıp <em>"14 Mayıs'ta Ali Bey'e zeyil kesmiştik, benim 1.500 liram nerede?"</em> demedikçe para şirkette kalır!
+        </div>
+      </div>
+
+      <!-- 4. Neden Fark Edilemez -->
+      <div class="story-card" style="border-left: 3px solid #f59e0b;">
+        <div class="story-card-header" style="color: #92400e;">4. Acente Patronu Bunu Neden Gözüyle Fark Edemez?</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          2.000 müşterisi olan bir acente ayda ortalama 100-150 tane zeyil keser. Acente patronu hangi müşterinin hangi gün ne zeyili kestiğini aklında tutamaz. Ekstrede olmayan bir şeyi gözle aramak imkansızdır. Her ay onlarca zeyil askıda kalır ve acenteden <strong>ayda 15.000 ₺ - 25.000 ₺ net para</strong> buharlaşır!
+        </div>
+      </div>
+
+      <!-- 5. Otonom Çözüm -->
+      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 7px 11px; font-size: 11px; color: #1e40af;">
+        <strong>🚀 Otonom Çözüm:</strong> Sistemimiz müşterinin kartından çekilen ek primi yakalar; şirketin ekstresinde komisyon satırı yoksa anında <strong>"Askıda Kalan Tahsilat (+1.500 ₺)"</strong> uyarısı verir ve resmi talep bordrosunu üretir.
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core ERP Platform • Saha İncelemeleri Eki • Sayfa 9 / 10</div>
+  </div>
+
+  <!-- ==================== SAYFA 10: EK BÖLÜM 4 - HAVUZ TIRPANLAMASI ==================== -->
+  <div class="page-container">
+    <div>
+      <div class="section-header">
+        <h2>EK BÖLÜM: GERÇEK SAHA VAKALARI & ÖRNEK OLAYLAR</h2>
+        <span class="sub"><span class="badge badge-rose">Saha İncelemesi 4</span></span>
+      </div>
+
+      <div class="highlight-banner" style="margin-top: 0; background: #fff1f2; border-color: #fecdd3;">
+        <div class="highlight-title" style="color: #9f1239;">📉 Vaka 4: "Havuz" Bahanesiyle Komisyon Tırpanlama (Hatalı Havuz Sınıflandırması)</div>
+        <div style="color: #881337; font-size: 11px;">
+          Temiz hususi otomobillerin sistemsel bir hata ile riskli havuz aracı etiketlenerek acente komisyonunun %15'ten %8'e düşürülmesi vakası.
+        </div>
+      </div>
+
+      <!-- 1. Terim -->
+      <div class="story-card" style="border-left: 3px solid #e11d48;">
+        <div class="story-card-header" style="color: #9f1239;">1. Önce Terimi Netleştirelim: "Riskli Sigortalılar Havuzu" Nedir?</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Taksiler, dolmuşlar, tırlar veya sürekli kaza yapan tehlikeli sürücüleri şirketler sigortalamak istemez. Devlet bu araçları ortak bir <strong>Riskli Havuz</strong>'da toplar ve şirketlere zorunlu dağıtır. Devlet kuralı gereği bu havuz poliçelerinde <strong>acente komisyonu düşüktür (%8 gibi).</strong> Normal, temiz hususi otomobillerde ise <strong>acente komisyonu yüksektir (%15 gibi).</strong>
+        </div>
+      </div>
+
+      <!-- 2. Olay Örgüsü -->
+      <div class="story-card" style="border-left: 3px solid #2563eb;">
+        <div class="story-card-header" style="color: #1e40af;">2. Sahadaki Gerçek Olay Örgüsü (Ahmet Bey ve Öğretmen Ayşe Hanım)</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Ayşe Hanım 10 yıllık öğretmendir. Hayatında hiç kaza yapmamış, tertemiz bir Renault Clio kullanmaktadır.<br>
+          • Ahmet Bey Ayşe Hanım'a 10.000 ₺'ye Zorunlu Trafik Sigortası keser.<br>
+          • Ahmet Bey'in hak ettiği yasal komisyon: <strong>%15 = 1.500 ₺</strong>'dir.
+        </div>
+      </div>
+
+      <!-- 3. Hata Nerede Çıkıyor -->
+      <div class="story-card" style="border-left: 3px solid #dc2626;">
+        <div class="story-card-header" style="color: #991b1b;">3. Para Nerede ve Nasıl Buharlaşıyor?</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Aracın 5 yıl önceki eski sahibinden kalma ufak bir tramer kaydı yüzünden, şirketin arka planındaki otomatik yazılım algoritması Ayşe Hanım'ın tertemiz hususi arabasını sistemsel bir hata ile <strong>"Riskli Havuz Aracı"</strong> gibi etiketler!<br>
+          • Ay sonu şirket ekstresinde Ahmet Bey'e 1.500 ₺ yerine <strong>%8'den 800 ₺</strong> ödenir!<br>
+          • Ahmet Bey'in <strong>700 ₺'si tek kalemde buharlaşmıştır!</strong>
+        </div>
+      </div>
+
+      <!-- 4. Neden Fark Edilemez -->
+      <div class="story-card" style="border-left: 3px solid #f59e0b;">
+        <div class="story-card-header" style="color: #92400e;">4. Acente Patronu Bunu Neden Gözüyle Fark Edemez?</div>
+        <div style="color: #334155; line-height: 1.5; font-size: 11.2px;">
+          Trafik sigortası sürümden kazanılır. Ayda 300-400 trafik sigortası kesen bir acentede 40-50 tanesi bu şekilde sistemsel hatayla havuza kaydırılsa, acentenin <strong>her ay 25.000 ₺ - 35.000 ₺ parası sessizce tırpanlanır!</strong> Ekstredeki binlerce aracın kullanım tarzını tek tek SBM'den kontrol etmek insan gücünü aşar.
+        </div>
+      </div>
+
+      <!-- 5. Otonom Çözüm -->
+      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 7px 11px; font-size: 11px; color: #1e40af;">
+        <strong>🚀 Otonom Çözüm:</strong> Sistem plaka ve şasiyi SBM'den doğrular; 'Hususi Otomobil' olduğunu gördüğü anda şirketin %8 uygulamasını reddeder ve %15 üzerinden <strong>aradaki 700 ₺'lik farkı</strong> anında itiraz bordrosuna ekler.
+      </div>
+    </div>
+    <div class="footer-note">InsurTech Core ERP Platform • Saha İncelemeleri Eki • Sayfa 10 / 10</div>
+  </div>
+
+</body>
+</html>
